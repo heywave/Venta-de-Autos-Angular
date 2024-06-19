@@ -1,0 +1,92 @@
+<div class="card">
+    <div class="card-header">
+      Lista de Vehiculos
+    </div>
+  
+    <div class="card-body">
+      <div class="row">
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Filtro:</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Marca">
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-3">
+          <a class="btn btn-info" [routerLink]="['/vehiculo']">+ Nuevo Vehiculo</a>
+        </div>
+        <div class="col-3">
+          <label for="rows">Filas:</label>
+          <select class="form-control" id="rows" [(ngModel)]="rows" (change)="consultarVehiculos()">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="25">25</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+      </div>
+      <br>
+  
+      <table class="table table-white">
+        <thead>
+          <tr>
+            <th>
+              <!-- Funcionalidad boton -->
+              <button class="btn btn-sm" (click)="mostrarImagen = !mostrarImagen"
+                [ngClass]="{'btn-info': mostrarImagen, 'btn-warning': !mostrarImagen}"
+                [innerText]="mostrarImagen ? 'Ocultar Imagen' : 'Mostrar Imagen'">
+              </button>
+  
+            </th>
+            <!-- crear tabla -->
+            <th>Codigo</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Año</th>
+            <th>Kilometraje</th>
+            <th>Precio</th>
+            <th>Calificación</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let item of listaVehiculos">
+            <tr>
+              <td><img [src]="item.foto" style="width: 100px;" *ngIf="mostrarImagen"></td>
+  
+              <td><a [routerLink]="['/vehiculos/'+item.codigo]">{{item.codigo}}</a></td>
+              <td [innerText]="item.marca"></td>
+              <td>{{item.modelo | lowercase | AEspacio:'-'}}</td>
+              <td>{{item.anio}}</td>
+              <td>{{item.kilometraje}}</td>
+              <td>{{item.precio | currency}}</td>
+              <td>{{item.calificacion}}</td>
+              <td>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <!-- Botón de Edición -->
+                <button type="button" class="btn btn-editar" (click)="editarVehiculo(item.codigo)">Editar</button>
+                <!-- Botón de Eliminación -->
+                <button type="button" class="btn btn-eliminar" (click)="eliminar(item.codigo)">Eliminar</button>
+              </div>
+            </td>
+            </tr>
+          </ng-container>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item"><a class="page-link" (click)='atras()'>Previous</a></li>
+                  <li class="page-item" *ngFor="let pagina of listaPaginas" [ngClass]="{'active': pagina == page}">
+                    <a class="page-link" (click)="cambiarpagina(pagina)">{{pagina}}</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" (click)="siguiente()">Next</a></li>
+                </ul>
+              </nav>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>

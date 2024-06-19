@@ -1,0 +1,25 @@
+.btn-editar {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .btn-editar:hover {
+    color: #fff;
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  /* Estilos para el botón de Eliminación */
+  .btn-eliminar {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .btn-eliminar:hover {
+    color: #fff;
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+  
